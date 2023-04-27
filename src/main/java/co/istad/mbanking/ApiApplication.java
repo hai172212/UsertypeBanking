@@ -1,4 +1,4 @@
-package co.istad.api;
+package co.istad.mbanking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

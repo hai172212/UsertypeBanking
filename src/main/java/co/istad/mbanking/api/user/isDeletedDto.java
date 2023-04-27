@@ -1,2 +1,4 @@
-package co.istad.mbanking.api.user;public class isDeletedDto {
+package co.istad.mbanking.api.user;
+
+public record isDeletedDto(boolean status) {
 }

@@ -1,4 +1,13 @@
-package co.istad.mbanking.api.accounttype.base;
+package co.istad.mbanking.api.base;
 
-public record BaseRest() {
+import lombok.Builder;
+
+import java.time.LocalDateTime;
+@Builder
+public record BaseRest <T>(Boolean status,
+                           Integer code,
+                           String message,
+                           LocalDateTime timeStap ,
+                           T data) {
+
 }
