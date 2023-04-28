@@ -12,7 +12,7 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true , keyColumn = "id",keyProperty = "id")
     void insert(@Param("u") User user);
     @SelectProvider(type = UserProvider.class , method = "buildInsertById")
-    @Result(column = "student_card_id",property = "studentCardងិត")
+    @Result(column = "student_card_id",property = "studentCard")
     @Result(column = "is_student",property = "isStudent")
     Optional<User> selectById(@Param("id") Integer id);
     @Select("SELECT EXISTS(SELECT * FROM user WHERE id = #{id})")
