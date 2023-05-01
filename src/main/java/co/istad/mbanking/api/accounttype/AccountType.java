@@ -1,13 +1,15 @@
 package co.istad.mbanking.api.accounttype;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class AccountType {
     private Integer id;
+
+    private Boolean isDeleted;
     private String name;
 
 }

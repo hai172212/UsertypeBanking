@@ -2,6 +2,7 @@ package co.istad.mbanking.api.user;
 
 import co.istad.mbanking.api.base.BaseError;
 import co.istad.mbanking.api.base.BaseRest;
+import com.github.pagehelper.PageInfo;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +43,34 @@ public class UserController {
                 .data(deleteId)
                 .build();
     }
+    @GetMapping
+    public BaseRest<?> findAllUser(@RequestParam(name = "page" , required = false,defaultValue = "1")
+                                       int page,
+                                   @RequestParam(name = "limit" , required = false,defaultValue = "20") int limit
 
+    ){
+        PageInfo<UerDto> userDtoPage = userService.findAllUser(page , limit);
+
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("User has been Created SuccessFully")
+                .timeStap(LocalDateTime.now())
+                .data(userDtoPage)
+                .build();
+    }
+
+    @PutMapping("/{id}/update-is-deleted")
+    public BaseRest<?> updateUserById(@PathVariable("id") Integer id , @RequestBody UpdateUserDto updateUserDto){
+        UerDto uerDto = userService.updateUserById(id , updateUserDto);
+        return BaseRest.builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("User has been deleted SuccessFully")
+                .timeStap(LocalDateTime.now())
+                .data(uerDto)
+                .build();
+    }
     @PutMapping("/{id}")
     public BaseRest<?> updateISDeletedStatusById(@PathVariable Integer id ,@RequestBody isDeletedDto dto){
         Integer deleteId = userService.updateISDeletedStatusById(id , dto.status());
@@ -54,6 +82,18 @@ public class UserController {
                 .data(deleteId)
                 .build();
     }
+    @GetMapping("/studentCardId-searched")
+    public BaseRest<?> searchUserByStudentCardId(@RequestBody StudentIdCardDto studentCardIDDto){
+        return BaseRest
+                .builder()
+                .status(true)
+                .code(HttpStatus.OK.value())
+                .message("User has been found successfully")
+                .timeStap(LocalDateTime.now())
+                .data(userService.findUserByStudentCardId(String.valueOf(studentCardIDDto)))
+                .build();
+    }
+
 
 
 }
